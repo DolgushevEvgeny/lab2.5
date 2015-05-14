@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ParseURL", "ParseURL\ParseURL.vcxproj", "{54C13178-A3DD-474E-8C87-85924155DA4B}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ParseURLTest", "ParseURLTest\ParseURLTest.vcxproj", "{F1D09FAB-4E86-48D1-9D47-E65260CE570F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{54C13178-A3DD-474E-8C87-85924155DA4B}.Debug|Win32.ActiveCfg = Debug|Win32
+		{54C13178-A3DD-474E-8C87-85924155DA4B}.Debug|Win32.Build.0 = Debug|Win32
+		{54C13178-A3DD-474E-8C87-85924155DA4B}.Release|Win32.ActiveCfg = Release|Win32
+		{54C13178-A3DD-474E-8C87-85924155DA4B}.Release|Win32.Build.0 = Release|Win32
+		{F1D09FAB-4E86-48D1-9D47-E65260CE570F}.Debug|Win32.ActiveCfg = Debug|Win32
+		{F1D09FAB-4E86-48D1-9D47-E65260CE570F}.Debug|Win32.Build.0 = Debug|Win32
+		{F1D09FAB-4E86-48D1-9D47-E65260CE570F}.Release|Win32.ActiveCfg = Release|Win32
+		{F1D09FAB-4E86-48D1-9D47-E65260CE570F}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
