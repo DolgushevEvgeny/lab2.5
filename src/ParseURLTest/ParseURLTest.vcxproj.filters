@@ -32,5 +32,8 @@
     <ClCompile Include="ParseURLTest.cpp">
       <Filter>Файлы исходного кода</Filter>
     </ClCompile>
+    <ClCompile Include="..\ParseURL\ParseURLUnit.cpp">
+      <Filter>Файлы исходного кода</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

@@ -12,14 +12,17 @@ using namespace std;
 set<char> g_invalidSymbols = { '!', '"', '#', '%', '&', '|', ' ', '{', '}', '^', '[', ']', '?', '>', '=', '<', ';', ':', ',', '*',
 							 '(', ')', '\'', '/' };
 
-bool CheckProtocolOnCorrect(const string &url, string &protocol, size_t &stringIndex, int &port)
+bool CheckProtocolOnCorrect(const string &url, Protocol &resultProtocol, size_t &stringIndex, int &port)
 {
-	protocol = url.substr(0, 5);
+	string protocol = url.substr(0, 5);
+	
+	std::transform(protocol.begin(), protocol.end(), protocol.begin(), tolower);
 
 	if (protocol == "https")
 	{
 		stringIndex = 5;
 		port = 443;
+		resultProtocol = Protocol::HTTPS;
 		return true;
 	}
 
@@ -28,6 +31,7 @@ bool CheckProtocolOnCorrect(const string &url, string &protocol, size_t &stringI
 	{
 		stringIndex = 4;
 		port = 80;
+		resultProtocol = Protocol::HTTP;
 		return true;
 	}
 
@@ -36,6 +40,7 @@ bool CheckProtocolOnCorrect(const string &url, string &protocol, size_t &stringI
 	{
 		stringIndex = 3;
 		port = 21;
+		resultProtocol = Protocol::FTP;
 		return true;
 	}
 	
@@ -88,14 +93,18 @@ bool CheckHostOnCorrect(const string &host)
 			return false;
 		}
 	}
-
+	
+	if (arrayStrings.size() == 0)
+	{
+		return false;
+	}
 	return true;
 }
 
 bool CheckPortOnCorrect(const string &url, int &port, size_t &index)
 {
 	string subPort;
-	for (int j = 1; j < 6; ++j)
+	for (int j = 1; j < 7; ++j)
 	{
 		if (isdigit(url[index + j]))
 		{
@@ -116,8 +125,15 @@ bool CheckPortOnCorrect(const string &url, int &port, size_t &index)
 			}
 
 			port = atoi(temp);
+
+			if ((port > 65535) | (port < 1))
+			{
+				delete[] temp;
+				return false;
+			}
+
 			delete[] temp;
-			index += j;
+			index += j + 1;
 			return true;
 		}
 	}
@@ -155,7 +171,7 @@ bool IsHostFounded(const string &url, string &host, size_t &stringIndex, int &po
 	return false;
 }
 
-bool ParseURL(string const &url, string &protocol, int &port, string &host, string &document)
+bool ParseURL(string const &url, Protocol &protocol, int &port, string &host, string &document)
 {
 	if (url.size() == 0)
 	{

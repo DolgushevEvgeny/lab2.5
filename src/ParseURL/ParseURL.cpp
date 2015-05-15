@@ -13,7 +13,7 @@ int main(int argc, char* argv[])
 	string curUrl;
 	while (getline(cin, curUrl))
 	{
-		string protocol;
+		Protocol protocol;
 		int port;
 		string host;
 		string document;
