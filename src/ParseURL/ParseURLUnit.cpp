@@ -141,13 +141,18 @@ bool CheckPortOnCorrect(const string &url, int &port, size_t &index)
 
 bool IsHostFounded(const string &url, string &host, size_t &stringIndex, int &port)
 {
+	if (url.size() == stringIndex)
+	{
+		return false;
+	}
+
 	for (size_t i = stringIndex; i < url.size(); ++i)
 	{
 		if (url[i] == '/')
 		{
 			if (!CheckHostOnCorrect(host))
 			{
-				break;
+				return false;
 			}
 			stringIndex = i + 1;
 			return true;
@@ -156,19 +161,28 @@ bool IsHostFounded(const string &url, string &host, size_t &stringIndex, int &po
 		{
 			if (!CheckHostOnCorrect(host))
 			{
-				break;
+				return false;
 			}
 
-			if (!CheckPortOnCorrect(url, port, i))
+			if (CheckPortOnCorrect(url, port, i))
 			{
-				break;
+				stringIndex = i;
+				i -= 2;
+				continue;
 			}
-			stringIndex = i;
-			return true;
+			else
+			{
+				return false;
+			}
 		}
 		host.push_back(url[i]);
 	}
-	return false;
+	if (!CheckHostOnCorrect(host))
+	{
+		return false;
+	}
+	stringIndex += host.size();
+	return true;
 }
 
 bool ParseURL(string const &url, Protocol &protocol, int &port, string &host, string &document)
@@ -195,6 +209,7 @@ bool ParseURL(string const &url, Protocol &protocol, int &port, string &host, st
 		return false;
 	}
 
+	stringIndex = stringIndex > url.size() ? url.size() - 1 : stringIndex;
 	document = url.substr(stringIndex, url.size());
 
 	return true;

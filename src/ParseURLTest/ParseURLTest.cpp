@@ -39,11 +39,11 @@ BOOST_AUTO_TEST_CASE(CheckProtocols)
 	std::string host, doc;
 	Protocol protocol;
 	int port;
-	BOOST_CHECK(!ParseURL("hTtp://www.youtube.com", protocol, port, host, doc));
+	BOOST_CHECK(ParseURL("hTtp://www.youtube.com", protocol, port, host, doc));
 	BOOST_CHECK_EQUAL(protocol, g_protocol);
-	BOOST_CHECK(!ParseURL("HttpS://www.youtube.com", protocol, port, host, doc));
+	BOOST_CHECK(ParseURL("HttpS://www.youtube.com", protocol, port, host, doc));
 	BOOST_CHECK_EQUAL(protocol, g_protocol1);
-	BOOST_CHECK(!ParseURL("FTp://www.youtube.com", protocol, port, host, doc));
+	BOOST_CHECK(ParseURL("FTp://www.youtube.com", protocol, port, host, doc));
 	BOOST_CHECK_EQUAL(protocol, g_protocol2);
 }
 
